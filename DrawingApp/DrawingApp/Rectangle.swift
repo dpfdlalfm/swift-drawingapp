@@ -12,25 +12,29 @@ class RandomViewFactory {
     // TODO: - 1. lazy var로 처리했는데 정확한 사용법 및 장단점 분석
     // TODO: - 2. Size, Point 구조체 private 선언자 삽입 가능한지
     let size = Size(width: 150, height: 120)
-    // lazy 키워드를 사용한 이유 : 기기별 safeArea와 스크린 크기는 다르기 때문에
-    // 뷰 컨트롤러에서 넘겨주도록 하기 위함
-    lazy var safeArea:Point = Point(x: 0, y: 0)
-    lazy var screen:Size = Size(width: 0, height: 0)
+    // init으로 받도록 변경한 이유는 어차피 하나의 장치 내에서 사용하므로
+    // safeArea는 한번만 초기화 하면 이후에는 계속 재사용이 더 효율적이라 판단함
+    private let deviceSafeArea:Point
+    private let deviceScreen:Size
     
-    func makeView(safeArea:Point) -> ModelView {
+    func makeView() -> ModelView {
         let id = setID()
         let point = setPoint()
         let color = setColor()
         let alpha = setAlpha()
-        
         return RectangleView(id, size, point, color, alpha)
     }
     
+    init(deviceSafeAreaPoint: Point, deviceScreenSize: Size) {
+        self.deviceSafeArea = deviceSafeAreaPoint
+        self.deviceScreen = deviceScreenSize
+    }
+    
     func setPoint() -> Point {
-        let randomRangeOfX = safeArea.x...(screen.width - size.width)
-        let randomRangeOfY = safeArea.y...(screen.height - size.height)
+        let randomRangeOfX = deviceSafeArea.x...(deviceScreen.width - size.width)
+        let randomRangeOfY = deviceSafeArea.y...(deviceScreen.height - size.height)
         return Point(x: Double.random(in: randomRangeOfX),
-                          y: Double.random(in: randomRangeOfY))
+                     y: Double.random(in: randomRangeOfY))
     }
     
     func setID() -> String {
