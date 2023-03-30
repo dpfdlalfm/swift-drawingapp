@@ -1,5 +1,5 @@
 struct RandomColor {
-    private let red:Int
+    let red:Int
     let green:Int
     let blue:Int
     
@@ -13,6 +13,6 @@ struct RandomColor {
 
 extension RandomColor: CustomStringConvertible {
     var description: String {
-        return "\(R:\(red), G:\(green), B:\(blue))"
+        return "R:\(red), G:\(green), B:\(blue)"
     }
 }

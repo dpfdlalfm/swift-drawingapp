@@ -1,4 +1,4 @@
-enum Alpha: Double {
+enum Alpha: Double, CaseIterable {
     case one = 1,
          two,
          three,
@@ -12,7 +12,7 @@ enum Alpha: Double {
 }
 
 struct RandomAlpha {
-    let alpha: Double
+    var alpha: Double?
     
     init() {
         guard let randomAlphaValue = Alpha.allCases.randomElement() else {
@@ -23,7 +23,7 @@ struct RandomAlpha {
     }
 }
 
-extension RandomAlpha:CustomStringConvertible, CaseIterable {
+extension RandomAlpha:CustomStringConvertible {
     var description:String {
         return "Alpha: \(alpha)"
     }

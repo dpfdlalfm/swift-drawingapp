@@ -8,7 +8,7 @@ struct Size {
     }
 }
 
-extension Size {
+extension Size: CustomStringConvertible {
     var description: String {
         return "W\(width), H\(height)"
     }

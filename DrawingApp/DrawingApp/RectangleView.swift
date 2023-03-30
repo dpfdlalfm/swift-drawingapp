@@ -1,4 +1,4 @@
-protocol RandomFigureView {
+protocol RandomFigureView: CustomStringConvertible {
     var size: Size { get }
     var id: RandomId { get }
     var point: RandomPoint { get }
@@ -6,7 +6,7 @@ protocol RandomFigureView {
     var alpha: RandomAlpha { get }
 }
 
-class RectangleView: RandomFigureView, CustomStringConvertible {
+class RectangleView: RandomFigureView {
     let size: Size
     let id: RandomId
     let point: RandomPoint
@@ -22,8 +22,9 @@ class RectangleView: RandomFigureView, CustomStringConvertible {
     }
 }
 
-extension RectangleView {
+extension RectangleView: CustomStringConvertible {
     var description: String {
         return "\(id), \(point), \(size), \(color), \(alpha)"
     }
 }
+

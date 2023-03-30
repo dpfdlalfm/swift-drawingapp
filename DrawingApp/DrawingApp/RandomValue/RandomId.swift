@@ -1,3 +1,5 @@
+import Foundation
+
 struct RandomId {
     let id: String
     
