@@ -5,9 +5,10 @@ struct RandomId {
     
     init() {
         var uuid = UUID().uuidString.suffix(9)
-        let thirdIndex = uuid.index(uuid.startIndex, offsetBy: 2)
+        let thirdIndex = uuid.index(uuid.startIndex, offsetBy: 3)
         uuid.insert("-", at: thirdIndex)
-        let sixthIndex = uuid.index(uuid.startIndex, offsetBy: 6)
+        let sixthIndex = uuid.index(thirdIndex, offsetBy: 4)
+        
         uuid.insert("-", at: sixthIndex)
         self.id = String(uuid)
     }

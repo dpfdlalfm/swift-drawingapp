@@ -24,6 +24,6 @@ struct RandomPoint {
 
 extension RandomPoint: CustomStringConvertible {
     var description: String {
-        return "X:\(x),Y:\(y)"
+        return String(format: "X:%.0f, Y:%.0f", x, y)
     }
 }
