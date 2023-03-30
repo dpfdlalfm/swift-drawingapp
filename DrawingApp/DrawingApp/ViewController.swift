@@ -2,17 +2,17 @@ import UIKit
 import OSLog
 
 class ViewController: UIViewController {
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-    }
-    
     override func viewDidAppear(_ animated: Bool) {
         let safeAreaPoint = getSafeAreaPoint()
         let screenSize = getScreenSize()
-        
         let factory = RectangleViewFactory(deviceSafeArea: safeAreaPoint, deviceScreen: screenSize)
         
+        let makeCount:Int = 4
+        for i in 1...makeCount {
+            let RectangleView = factory.makeView()
+            let logger = Logger(subsystem: "com.inwoo.DrawingApp", category: "ViewController")
+            logger.log("Rect\(i) \(RectangleView.description)")
+        }
     }
     
     func getSafeAreaPoint() -> Point {
