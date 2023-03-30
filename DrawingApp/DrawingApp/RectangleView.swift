@@ -1,11 +1,3 @@
-protocol RandomFigureView: CustomStringConvertible {
-    var size: Size { get }
-    var id: RandomId { get }
-    var point: RandomPoint { get }
-    var color: RandomColor { get }
-    var alpha: RandomAlpha { get }
-}
-
 class RectangleView: RandomFigureView {
     let size: Size
     let id: RandomId

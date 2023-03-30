@@ -22,6 +22,8 @@
 		635B1FB029D52A7900CCDCFF /* RandomColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 635B1FAC29D52A7900CCDCFF /* RandomColor.swift */; };
 		635B1FB129D52A7900CCDCFF /* RandomId.swift in Sources */ = {isa = PBXBuildFile; fileRef = 635B1FAD29D52A7900CCDCFF /* RandomId.swift */; };
 		635B1FB429D52AE300CCDCFF /* RandomPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 635B1FB329D52AE300CCDCFF /* RandomPoint.swift */; };
+		635B1FB629D59B3A00CCDCFF /* RandomViewFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 635B1FB529D59B3A00CCDCFF /* RandomViewFactory.swift */; };
+		635B1FB829D59B5900CCDCFF /* RandomFigureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 635B1FB729D59B5900CCDCFF /* RandomFigureView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -61,6 +63,8 @@
 		635B1FAC29D52A7900CCDCFF /* RandomColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RandomColor.swift; sourceTree = "<group>"; };
 		635B1FAD29D52A7900CCDCFF /* RandomId.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RandomId.swift; sourceTree = "<group>"; };
 		635B1FB329D52AE300CCDCFF /* RandomPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RandomPoint.swift; sourceTree = "<group>"; };
+		635B1FB529D59B3A00CCDCFF /* RandomViewFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RandomViewFactory.swift; sourceTree = "<group>"; };
+		635B1FB729D59B5900CCDCFF /* RandomFigureView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RandomFigureView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -115,7 +119,9 @@
 				635B1F6629D1379C00CCDCFF /* SceneDelegate.swift */,
 				635B1F6829D1379C00CCDCFF /* DrawingViewController.swift */,
 				635B1F9429D189D100CCDCFF /* RectangleViewFactory.swift */,
+				635B1FB529D59B3A00CCDCFF /* RandomViewFactory.swift */,
 				635B1F9629D5295B00CCDCFF /* RectangleView.swift */,
+				635B1FB729D59B5900CCDCFF /* RandomFigureView.swift */,
 				635B1F9C29D529C700CCDCFF /* Size.swift */,
 				635B1FA229D52A6200CCDCFF /* RandomValue */,
 				635B1F6A29D1379C00CCDCFF /* Main.storyboard */,
@@ -283,12 +289,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				635B1FB629D59B3A00CCDCFF /* RandomViewFactory.swift in Sources */,
 				635B1F9D29D529C700CCDCFF /* Size.swift in Sources */,
 				635B1F6929D1379C00CCDCFF /* DrawingViewController.swift in Sources */,
 				635B1F6529D1379C00CCDCFF /* AppDelegate.swift in Sources */,
 				635B1FAF29D52A7900CCDCFF /* RandomAlpha.swift in Sources */,
 				635B1F6729D1379C00CCDCFF /* SceneDelegate.swift in Sources */,
 				635B1F9529D189D100CCDCFF /* RectangleViewFactory.swift in Sources */,
+				635B1FB829D59B5900CCDCFF /* RandomFigureView.swift in Sources */,
 				635B1F9729D5295B00CCDCFF /* RectangleView.swift in Sources */,
 				635B1FB029D52A7900CCDCFF /* RandomColor.swift in Sources */,
 				635B1FB129D52A7900CCDCFF /* RandomId.swift in Sources */,
