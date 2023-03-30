@@ -1,4 +1,4 @@
-enum Alpha: Double, CaseIterable {
+enum Alpha: Double {
     case one = 1,
          two,
          three,
@@ -20,5 +20,11 @@ struct RandomAlpha {
         }
         let divideNumber: Double = 10
         self.alpha = randomAlphaValue.rawValue / divideNumber
+    }
+}
+
+extension RandomAlpha:CustomStringConvertible, CaseIterable {
+    var description:String {
+        return "Alpha: \(alpha)"
     }
 }

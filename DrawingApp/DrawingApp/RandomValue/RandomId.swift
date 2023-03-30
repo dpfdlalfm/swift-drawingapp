@@ -10,3 +10,9 @@ struct RandomId {
         self.id = String(uuid)
     }
 }
+
+extension RandomId: CustomStringConvertible {
+    var description:String {
+        return "(\(id))"
+    }
+}

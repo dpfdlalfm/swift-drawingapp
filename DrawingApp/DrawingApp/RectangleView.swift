@@ -6,7 +6,7 @@ protocol RandomFigureView {
     var alpha: RandomAlpha { get }
 }
 
-class RectangleView: RandomFigureView {
+class RectangleView: RandomFigureView, CustomStringConvertible {
     let size: Size
     let id: RandomId
     let point: RandomPoint
@@ -19,5 +19,11 @@ class RectangleView: RandomFigureView {
         self.point = point
         self.color = color
         self.alpha = alpha
+    }
+}
+
+extension RectangleView {
+    var description: String {
+        return "\(id), \(point), \(size), \(color), \(alpha)"
     }
 }

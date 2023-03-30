@@ -21,3 +21,9 @@ struct RandomPoint {
         self.y = Double.random(in: rangeOfY)
     }
 }
+
+extension RandomPoint: CustomStringConvertible {
+    var description: String {
+        return "X:\(x),Y:\(y)"
+    }
+}

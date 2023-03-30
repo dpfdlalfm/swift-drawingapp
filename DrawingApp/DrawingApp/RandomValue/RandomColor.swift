@@ -10,3 +10,9 @@ struct RandomColor {
         self.blue = Int.random(in: randomRange)
     }
 }
+
+extension RandomColor: CustomStringConvertible {
+    var description: String {
+        return "\(R:\(red), G:\(green), B:\(blue))"
+    }
+}
