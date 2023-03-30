@@ -13,10 +13,10 @@ struct RandomPoint {
     let y: Double
     
     init(deviceSafeArea: Point, screenSize: Size) {
-        let requirementWidth: Double = 150
-        let rangeOfX = deviceSafeArea.x...(screenSize.width - requirementWidth)
-        let requirementHeight: Double = 120
-        let rangeOfY = deviceSafeArea.y...(screenSize.height - requirementHeight)
+        let FigureViewWidth: Double = 150
+        let rangeOfX = deviceSafeArea.x...(screenSize.width - FigureViewWidth)
+        let FigureViewHeight: Double = 120
+        let rangeOfY = deviceSafeArea.y...(screenSize.height - FigureViewHeight)
         self.x = Double.random(in: rangeOfX)
         self.y = Double.random(in: rangeOfY)
     }
