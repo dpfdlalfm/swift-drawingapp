@@ -12,14 +12,14 @@ enum Alpha: Double, CaseIterable {
 }
 
 struct RandomAlpha {
-    var alpha: Double?
+    var alpha: Double
     
     init() {
-        guard let randomAlphaValue = Alpha.allCases.randomElement() else {
-            return
-        }
+        let allAlphaCases = Alpha.allCases
+        let randomIndex = Int.random(in: 0..<allAlphaCases.count)
+        let randomAlphaValue = allAlphaCases[randomIndex].rawValue
         let divideNumber: Double = 10
-        self.alpha = randomAlphaValue.rawValue / divideNumber
+        self.alpha = randomAlphaValue / divideNumber
     }
 }
 
