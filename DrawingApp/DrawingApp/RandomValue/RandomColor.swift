@@ -1,7 +1,7 @@
 struct RandomColor {
-    let red:Int
-    let green:Int
-    let blue:Int
+    var red:Int
+    var green:Int
+    var blue:Int
     
     init() {
         let randomRange = 0..<255

@@ -2,8 +2,8 @@ class RectangleView: RandomFigureView {
     let size: Size
     let id: RandomId
     let point: RandomPoint
-    let color: RandomColor
-    let alpha: RandomAlpha
+    var color: RandomColor
+    var alpha: RandomAlpha
     
     init(size: Size, id: RandomId, point: RandomPoint, color: RandomColor, alpha: RandomAlpha) {
         self.size = size
