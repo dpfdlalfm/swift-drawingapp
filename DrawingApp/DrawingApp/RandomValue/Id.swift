@@ -1,7 +1,5 @@
-import Foundation
-
 struct Id: Hashable {
-    private let id: String
+    let id: String
     
     init(id: String) {
         self.id = id

@@ -1,7 +1,7 @@
 struct Color {
-    private var red:Int
-    private var green:Int
-    private var blue:Int
+    var red:Int
+    var green:Int
+    var blue:Int
     
     init(red: Int, green: Int, blue: Int) {
         self.red = red
