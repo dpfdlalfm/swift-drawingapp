@@ -1,4 +1,4 @@
-protocol RandomFigureView: CustomStringConvertible {
+protocol RandomFigure: CustomStringConvertible {
     var size: Size { get }
     var id: RandomId { get }
     var point: RandomPoint { get }

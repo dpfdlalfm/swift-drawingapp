@@ -2,17 +2,33 @@ import UIKit
 import OSLog
 
 class DrawingViewController: UIViewController {
+    var rectangleFactory:RectangleFactory?
+    var logger:Logger?
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        guard logger == nil else {
+            return
+        }
+        logger = Logger(subsystem: "com.inwoo.DrawingApp", category: "ViewController")
+    }
+    
     override func viewDidAppear(_ animated: Bool) {
-        let safeAreaPoint = getSafeAreaPoint()
-        let screenSize = getScreenSize()
-        let factory = RectangleViewFactory(deviceSafeArea: safeAreaPoint, deviceScreen: screenSize)
+        super.viewDidAppear(animated)
+        if rectangleFactory == nil {
+            let safeAreaPoint = getSafeAreaPoint()
+            let screenSize = getScreenSize()
+            rectangleFactory = RectangleFactory(deviceSafeArea: safeAreaPoint, deviceScreen: screenSize)
+        }
         
         let makeCount:Int = 4
         for i in 1...makeCount {
-            let RectangleView = factory.makeView()
-            let logger = Logger(subsystem: "com.inwoo.DrawingApp", category: "ViewController")
-            logger.log("Rect\(i) \(RectangleView.description)")
+            guard let rectangle = rectangleFactory?.make() else {
+                return
+            }
+            logger?.log("Rect\(i) \(rectangle.description)")
         }
+        logger?.log("\(self.rectangleFactory!.description)")
     }
     
     private func getSafeAreaPoint() -> Point {

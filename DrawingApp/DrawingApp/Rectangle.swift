@@ -1,4 +1,4 @@
-class RectangleView: RandomFigureView {
+class Rectangle: RandomFigure {
     let size: Size
     let id: RandomId
     let point: RandomPoint
@@ -14,7 +14,7 @@ class RectangleView: RandomFigureView {
     }
 }
 
-extension RectangleView: CustomStringConvertible {
+extension Rectangle: CustomStringConvertible {
     var description: String {
         return "\(id), \(point), \(size), \(color), \(alpha)"
     }
