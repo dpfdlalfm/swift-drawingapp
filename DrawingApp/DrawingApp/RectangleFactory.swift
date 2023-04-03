@@ -6,7 +6,7 @@ class RectangleFactory: RandomFigureFactory {
     let pointFactory: RandomPointFactory
     let alphaFactory: RandomAlphaFactory
     
-    required init(deviceSafeArea: Point, deviceScreenSize: Size) {
+    init(deviceSafeArea: Point, deviceScreenSize: Size) {
         idFactory = RandomIdFactory()
         colorFactory = RandomColorFactory()
         pointFactory = RandomPointFactory(safeArea: deviceSafeArea, screen: deviceScreenSize)
