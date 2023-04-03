@@ -1,3 +1,4 @@
 protocol RandomFigureFactory {
-    func make() -> RandomFigure
+    init(deviceSafeArea: Point, deviceScreenSize: Size)
+    func create() -> RandomFigure
 }

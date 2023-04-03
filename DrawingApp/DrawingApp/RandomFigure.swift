@@ -1,7 +1,4 @@
 protocol RandomFigure: CustomStringConvertible {
-    var size: Size { get }
-    var id: RandomId { get }
-    var point: RandomPoint { get }
-    var color: RandomColor { get set }
-    var alpha: RandomAlpha { get set }
+    var color: Color { get }
+    var alpha: Alpha { get }
 }

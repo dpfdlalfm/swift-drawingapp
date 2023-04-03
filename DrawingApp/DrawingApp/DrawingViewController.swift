@@ -18,17 +18,16 @@ class DrawingViewController: UIViewController {
         if rectangleFactory == nil {
             let safeAreaPoint = getSafeAreaPoint()
             let screenSize = getScreenSize()
-            rectangleFactory = RectangleFactory(deviceSafeArea: safeAreaPoint, deviceScreen: screenSize)
+            rectangleFactory = RectangleFactory(deviceSafeArea: safeAreaPoint, deviceScreenSize: screenSize)
         }
         
         let makeCount:Int = 4
         for i in 1...makeCount {
-            guard let rectangle = rectangleFactory?.make() else {
+            guard let rectangle = rectangleFactory?.create() else {
                 return
             }
             logger?.log("Rect\(i) \(rectangle.description)")
         }
-        logger?.log("\(self.rectangleFactory!.description)")
     }
     
     private func getSafeAreaPoint() -> Point {
