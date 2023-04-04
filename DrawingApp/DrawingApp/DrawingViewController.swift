@@ -1,12 +1,14 @@
 import UIKit
-import OSLog
+import os
 
 class DrawingViewController: UIViewController {
     var rectangleFactory:RectangleFactory?
     var logger:Logger?
+    @IBOutlet weak var FigureInsperctorView: UIView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         guard logger == nil else {
             return
         }
@@ -28,6 +30,14 @@ class DrawingViewController: UIViewController {
             }
             logger?.log("Rect\(i) \(rectangle.description)")
         }
+    }
+
+    private func color(view: UIView, to color: Color, with alpha: Alpha) {
+        let red = CGFloat(color.red)
+        let green = CGFloat(color.green)
+        let blue = CGFloat(color.blue)
+        let color = CGColor(red: red, green: green, blue: blue, alpha: alpha.rawValue)
+        view.backgroundColor = UIColor(cgColor: color)
     }
     
     private func getSafeAreaPoint() -> Point {
