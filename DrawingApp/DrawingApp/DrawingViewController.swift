@@ -8,12 +8,6 @@ class DrawingViewController: UIViewController {
     @IBOutlet weak var figureInspectorHideButton: UIButton!
     override func viewDidLoad() {
         super.viewDidLoad()
-        let darkGray = UIColor(cgColor: CGColor(gray: 33,
-            alpha: 1))
-        figureInspectorHideButton.backgroundColor = darkGray
-        let lightGray = UIColor(cgColor: CGColor(gray: 67,
-            alpha: 1))
-        figureInspectorHideButton.tintColor = lightGray
         figureInspectorHideButton.layer.cornerRadius = CGFloat(15)
         
         guard logger == nil else {
