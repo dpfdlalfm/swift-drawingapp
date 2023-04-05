@@ -1,19 +1,18 @@
-import Foundation
-
-class RectangleFactory: RandomFigureFactory {
-    private let propertyFactory: RandomValueFactory
+class RectangleFactory: FigureFactory {
+    typealias Figure = Rectangle
+    private let randomPropertyFactory: RandomValueFactory
     
     init(deviceSafeArea: Point, deviceScreenSize: Size) {
-        propertyFactory = RandomValueFactory( safeArea: deviceSafeArea,
+        randomPropertyFactory = RandomValueFactory( safeArea: deviceSafeArea,
                                               screen: deviceScreenSize )
     }
     
-    func create() -> RandomFigure {
+    func create() -> Rectangle {
         let size = Size(width: 150, height: 120)
-        let id = propertyFactory.createId()
-        let point = propertyFactory.createPoint()
-        let color = propertyFactory.createColor()
-        let alpha = propertyFactory.createAlpha()
+        let id = randomPropertyFactory.createId()
+        let point = randomPropertyFactory.createPoint()
+        let color = randomPropertyFactory.createColor()
+        let alpha = randomPropertyFactory.createAlpha()
         return Rectangle(size: size, id: id, point: point, color: color, alpha: alpha)
     }
 }

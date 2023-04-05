@@ -1,4 +1,4 @@
-class Rectangle: RandomFigure {
+class Rectangle: Figure {
     let size: Size
     let id: Id
     let point: Point
@@ -19,4 +19,3 @@ extension Rectangle: CustomStringConvertible {
         return "\(id), \(point), \(size), \(color), \(alpha)"
     }
 }
-

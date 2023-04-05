@@ -29,7 +29,7 @@ struct RandomValueFactory {
     }
     
     func createColor() -> Color {
-        let randomRange = 0..<255
+        let randomRange = 0...255
         let red = Int.random(in: randomRange)
         let green = Int.random(in: randomRange)
         let blue = Int.random(in: randomRange)
