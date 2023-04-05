@@ -1,13 +1,19 @@
 import UIKit
-import os
+import OSLog
 
 class DrawingViewController: UIViewController {
     var rectangleFactory:RectangleFactory?
     var logger:Logger?
-    @IBOutlet weak var FigureInsperctorView: UIView!
-    
+    @IBOutlet weak var figureInsperctorView: UIView!
+    @IBOutlet weak var figureInspectorHideButton: UIButton!
     override func viewDidLoad() {
         super.viewDidLoad()
+        let darkGray = UIColor(cgColor: CGColor(gray: 33,
+            alpha: 1))
+        figureInspectorHideButton.backgroundColor = darkGray
+        let lightGray = UIColor(cgColor: CGColor(gray: 67,
+            alpha: 1))
+        figureInspectorHideButton.tintColor = lightGray
         
         guard logger == nil else {
             return
@@ -31,6 +37,10 @@ class DrawingViewController: UIViewController {
             logger?.log("Rect\(i) \(rectangle.description)")
         }
     }
+    
+    @IBAction func didTapHideButton(_ sender: Any) {
+        
+    }
 
     private func color(view: UIView, to color: Color, with alpha: Alpha) {
         let red = CGFloat(color.red)
@@ -47,8 +57,8 @@ class DrawingViewController: UIViewController {
     }
     
     private func getScreenSize() -> Size {
-        let screenWidth = Double(UIScreen.main.bounds.width)
-        let screenHeight = Double(UIScreen.main.bounds.height)
+        let screenWidth = Double(UIScreen.main.bounds.size.width)
+        let screenHeight = Double(UIScreen.main.bounds.size.height)
         return Size(width: screenWidth, height: screenHeight)
     }
 }
