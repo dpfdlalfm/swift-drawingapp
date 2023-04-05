@@ -15,6 +15,7 @@ class DrawingViewController: UIViewController {
         figureInspectorHideButton.layer.cornerRadius = CGFloat(15)
         rectangleButton.layer.cornerRadius = 40
         rectangleButton.layer.cornerCurve = .continuous
+        self.view.backgroundColor = .white
         
         guard logger == nil else {
             return
@@ -38,20 +39,30 @@ class DrawingViewController: UIViewController {
             return
         }
         plane.add(figure: rectangle)
+        let rectangleView = UIView(
+            frame:CGRect(x: rectangle.point.x,
+                         y: rectangle.point.y,
+                         width: rectangle.size.width,
+                         height: rectangle.size.height))
+        rectangleView.backgroundColor = getUIColor(by: rectangle.color, with: rectangle.alpha)
+        self.view.addSubview(rectangleView)
     }
     
-    @IBAction func didTapHideButton(_ sender: Any) {
+    @IBAction func hideInspector(_ sender: Any) {
         
     }
-
-    private func color(view: UIView, to color: Color, with alpha: Alpha) {
-        let red = CGFloat(color.red)
-        let green = CGFloat(color.green)
-        let blue = CGFloat(color.blue)
-        let color = CGColor(red: red, green: green, blue: blue, alpha: alpha.rawValue)
-        view.backgroundColor = UIColor(cgColor: color)
-    }
     
+    // Color를 UIColor로 변경하여 return 하는 메소드
+    private func getUIColor(by color: Color, with alpha: Alpha) -> UIColor {
+        let rgbMaxValue = 255.0
+        let red = CGFloat(color.red / rgbMaxValue)
+        let green = CGFloat(color.green / rgbMaxValue)
+        let blue = CGFloat(color.blue / rgbMaxValue)
+        let alphaMaxValue = 10.0
+        let color = UIColor(red: red, green: green, blue: blue, alpha: alpha.rawValue / alphaMaxValue)
+        return color
+    }
+
     private func getSafeAreaPoint() -> Point {
         let safeAreaPointX = Double(self.view.layoutMargins.top)
         let safeAreaPointY = Double(self.view.layoutMargins.bottom)

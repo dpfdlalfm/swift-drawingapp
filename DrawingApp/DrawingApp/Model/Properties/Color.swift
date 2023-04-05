@@ -1,9 +1,9 @@
 struct Color {
-    var red:Int
-    var green:Int
-    var blue:Int
+    var red: Double
+    var green: Double
+    var blue: Double
     
-    init(red: Int, green: Int, blue: Int) {
+    init(red: Double, green: Double, blue: Double) {
         self.red = red
         self.green = green
         self.blue = blue

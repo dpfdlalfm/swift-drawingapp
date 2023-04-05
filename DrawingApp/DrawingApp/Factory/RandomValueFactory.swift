@@ -29,10 +29,10 @@ struct RandomValueFactory {
     }
     
     func createColor() -> Color {
-        let randomRange = 0...255
-        let red = Int.random(in: randomRange)
-        let green = Int.random(in: randomRange)
-        let blue = Int.random(in: randomRange)
+        let randomRange = 0...255.0
+        let red = Double.random(in: randomRange)
+        let green = Double.random(in: randomRange)
+        let blue = Double.random(in: randomRange)
         return Color(red: red, green: green, blue: blue)
     }
     
