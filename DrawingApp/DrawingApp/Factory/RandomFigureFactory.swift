@@ -1,3 +1,3 @@
 protocol RandomFigureFactory {
-    func create() -> RandomFigure
+    func create() -> Figure
 }

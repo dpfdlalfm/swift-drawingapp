@@ -6,9 +6,13 @@ class DrawingViewController: UIViewController {
     var logger:Logger?
     @IBOutlet weak var figureInsperctorView: UIView!
     @IBOutlet weak var figureInspectorHideButton: UIButton!
+    @IBOutlet weak var rectangleButton: UIButton!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         figureInspectorHideButton.layer.cornerRadius = CGFloat(15)
+        rectangleButton.layer.cornerRadius = 40
+        rectangleButton.layer.cornerCurve = .continuous
         
         guard logger == nil else {
             return
@@ -33,6 +37,10 @@ class DrawingViewController: UIViewController {
             }
             logger?.log("Rect\(i) \(rectangle.description)")
         }
+    }
+    
+    @IBAction func createRectangle(_ sender: Any) {
+        
     }
     
     @IBAction func didTapHideButton(_ sender: Any) {

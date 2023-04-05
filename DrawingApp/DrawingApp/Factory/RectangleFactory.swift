@@ -1,5 +1,3 @@
-import Foundation
-
 class RectangleFactory: RandomFigureFactory {
     private let propertyFactory: RandomValueFactory
     
@@ -8,7 +6,7 @@ class RectangleFactory: RandomFigureFactory {
                                               screen: deviceScreenSize )
     }
     
-    func create() -> RandomFigure {
+    func create() -> Figure {
         let size = Size(width: 150, height: 120)
         let id = propertyFactory.createId()
         let point = propertyFactory.createPoint()
