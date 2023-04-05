@@ -14,6 +14,7 @@ class DrawingViewController: UIViewController {
         let lightGray = UIColor(cgColor: CGColor(gray: 67,
             alpha: 1))
         figureInspectorHideButton.tintColor = lightGray
+        figureInspectorHideButton.layer.cornerRadius = CGFloat(15)
         
         guard logger == nil else {
             return
@@ -25,7 +26,9 @@ class DrawingViewController: UIViewController {
         super.viewDidAppear(animated)
         if rectangleFactory == nil {
             let safeAreaPoint = getSafeAreaPoint()
-            let screenSize = getScreenSize()
+            guard let screenSize = getScreenSize() else {
+                return
+            }
             rectangleFactory = RectangleFactory(deviceSafeArea: safeAreaPoint, deviceScreenSize: screenSize)
         }
         
@@ -56,9 +59,12 @@ class DrawingViewController: UIViewController {
         return Point(x: safeAreaPointX, y: safeAreaPointY)
     }
     
-    private func getScreenSize() -> Size {
-        let screenWidth = Double(UIScreen.main.bounds.size.width)
-        let screenHeight = Double(UIScreen.main.bounds.size.height)
+    private func getScreenSize() -> Size? {
+        guard let screenBounds = self.view.window?.windowScene?.screen.bounds else {
+            return nil
+        }
+        let screenWidth = screenBounds.size.width
+        let screenHeight = screenBounds.size.height
         return Size(width: screenWidth, height: screenHeight)
     }
 }
