@@ -1,10 +1,12 @@
 import UIKit
 import OSLog
 
-class DrawingViewController: UIViewController {
+class DrawingViewController: UIViewController, UIGestureRecognizerDelegate {
+    let tapGestureRecognizer = UITapGestureRecognizer()
     var rectangleFactory: RectangleFactory?
-    var logger: Logger?
     var plane = Plane()
+    var figureViews: Dictionary<Id, UIView> = [:]
+    var logger: Logger?
     
     @IBOutlet weak var figureInsperctorView: UIView!
     @IBOutlet weak var figureInspectorHideButton: UIButton!
@@ -12,10 +14,11 @@ class DrawingViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        tapGestureRecognizer.delegate = self
+        
         figureInspectorHideButton.layer.cornerRadius = CGFloat(15)
         rectangleButton.layer.cornerRadius = 40
         rectangleButton.layer.cornerCurve = .continuous
-        self.view.backgroundColor = .white
         
         guard logger == nil else {
             return
@@ -35,21 +38,35 @@ class DrawingViewController: UIViewController {
     }
     
     @IBAction func createRectangle(_ sender: Any) {
-        guard let rectangle = rectangleFactory?.create() else {
-            return
-        }
-        plane.add(figure: rectangle)
+        guard let rectangle = rectangleFactory?.create() else { return }
+        
         let rectangleView = UIView(
             frame:CGRect(x: rectangle.point.x,
                          y: rectangle.point.y,
                          width: rectangle.size.width,
                          height: rectangle.size.height))
         rectangleView.backgroundColor = getUIColor(by: rectangle.color, with: rectangle.alpha)
+        rectangleView.addGestureRecognizer(tapGestureRecognizer)
+        
+        guard let level = self.view.subviews.firstIndex(of: rectangleView) else {
+            return
+        }
+        
+        let closure = { (rectangle: Rectangle, level: Int) in
+            self.plane.rectangles += [(rectangle, level)]
+        }
+        closure(rectangle, level)
+        
+        self.figureViews[rectangle.id] = rectangleView
         self.view.addSubview(rectangleView)
     }
     
     @IBAction func hideInspector(_ sender: Any) {
         
+    }
+    
+    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
+        return true
     }
     
     // Color를 UIColor로 변경하여 return 하는 메소드
