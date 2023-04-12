@@ -9,8 +9,10 @@ class DrawingViewController: UIViewController {
     var figureViews: Dictionary<Id, UIView> = [:]
     var logger: Logger = Logger(subsystem: "com.inwoo.DrawingApp", category: "ViewController")
     
+    @IBOutlet weak var alphaSlider: UISlider!
     @IBOutlet weak var figureInsperctorView: UIView!
     @IBOutlet weak var figureInspectorHideButton: UIButton!
+    @IBOutlet weak var colorChanger: UIButton!
     @IBOutlet weak var rectangleButton: UIButton!
     
     override func viewDidLoad() {
@@ -20,6 +22,7 @@ class DrawingViewController: UIViewController {
         figureInspectorHideButton.layer.cornerRadius = CGFloat(15)
         rectangleButton.layer.cornerRadius = 40
         rectangleButton.layer.cornerCurve = .continuous
+        colorChanger.layer.borderWidth = 2
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -35,35 +38,37 @@ class DrawingViewController: UIViewController {
     
     @IBAction func createRectangleView(_ sender: UIButton) {
         guard let rectangle = rectangleFactory?.create() else { return }
-        
-        let rectangleView = UIView(
-            frame:CGRect(x: rectangle.point.x,
-                         y: rectangle.point.y,
-                         width: rectangle.size.width,
-                         height: rectangle.size.height))
-        rectangleView.backgroundColor = getUIColor(by: rectangle.color, with: rectangle.alpha)
-        self.view.addSubview(rectangleView)
-        
+
         // Plane에서 mutating 키워드를 사용하여 추가하는 대신 클로저를 이용하여 구현했습니다.
         // 근거는 클로저로 해당 기능을 구현했을 때, plane구조체의 주소값이 바뀌지 않는 장점이 있었기 때문입니다.
-        let closure = { (rectangle: Rectangle, level: Int) in
-            self.plane.rectangles += [(rectangle, level)]
+        let closure = { (rectangle: Rectangle) in
+            self.plane.rectangles += [rectangle]
         }
-        guard let level = self.view.subviews.firstIndex(of: rectangleView) else {
-            return
-        }
-        closure(rectangle, level)
+        closure(rectangle)
         
+        let rectangleView = converToView(by: rectangle)
         self.figureViews[rectangle.id] = rectangleView
-        view.bringSubviewToFront(sender)
+            
+        self.view.addSubview(rectangleView)
+        self.view.bringSubviewToFront(sender)
     }
     
     @IBAction func hideInspector(_ sender: Any) {
         
     }
     
+    @IBAction func isValuechanged(_ sender: UISlider) {
+        let value = sender.value
+        if !selectedView.isEmpty {
+            selectedView.forEach {
+                $0.alpha = CGFloat(value)
+            }
+        }
+    }
+    
     @objc func tap(_ sender: UITapGestureRecognizer) {
-        guard let rectangle = plane.isExist(in: sender.location(in: self.view)) else {
+        guard let tappedPoint = plane.isExist(in: sender.location(in: self.view)) else {
+            // 존재하지 않으면 선택 취소
             selectedView.forEach {
                 $0.layer.borderWidth = 0
             }
@@ -71,17 +76,30 @@ class DrawingViewController: UIViewController {
             return
         }
         
-        if let rectangleView = figureViews[rectangle.id] {
-            rectangleView.layer.borderWidth = 5
-            rectangleView.layer.borderColor = UIColor.blue.cgColor
-            selectedView.append(rectangleView)
+        guard let rectangleView = self.view.hitTest(tappedPoint, with: nil) else {
+            return
         }
+        
+        rectangleView.layer.borderWidth = 2
+        rectangleView.layer.borderColor = UIColor.blue.cgColor
+        selectedView.append(rectangleView)
     }
 }
 
 extension DrawingViewController {
+    private func converToView(by rectangle: Rectangle) -> UIView {
+        let rectangleView = UIView(
+            frame: CGRect(x: rectangle.point.x,
+                          y: rectangle.point.y,
+                          width: rectangle.size.width,
+                          height: rectangle.size.height))
+        rectangleView.backgroundColor = convertToUIColor(by: rectangle.color,
+                                                   with: rectangle.alpha)
+        return rectangleView
+    }
+    
     // Color를 UIColor로 변경하여 return 하는 메소드
-    private func getUIColor(by color: Color, with alpha: Alpha) -> UIColor {
+    private func convertToUIColor(by color: Color, with alpha: Alpha) -> UIColor {
         let rgbMaxValue = 255.0
         let red = CGFloat(color.red / rgbMaxValue)
         let green = CGFloat(color.green / rgbMaxValue)
