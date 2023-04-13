@@ -35,7 +35,7 @@ class Plane {
     
     func changeColor(indicies: [Int], with value: Color) {
         indicies.forEach {
-            
+            rectangles[$0].color = value
         }
     }
     

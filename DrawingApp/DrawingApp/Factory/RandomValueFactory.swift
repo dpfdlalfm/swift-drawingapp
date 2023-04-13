@@ -28,14 +28,6 @@ struct RandomValueFactory {
         return Point(x: pointX, y: pointY)
     }
     
-    func createColor() -> Color {
-        let randomRange = 0...255.0
-        let red = Double.random(in: randomRange)
-        let green = Double.random(in: randomRange)
-        let blue = Double.random(in: randomRange)
-        return Color(red: red, green: green, blue: blue)
-    }
-    
     func createAlpha() -> Alpha {
         let allAlphaCases = Alpha.allCases
         let randomIndex = Int.random(in: 0..<allAlphaCases.count)

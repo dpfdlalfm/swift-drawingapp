@@ -37,6 +37,17 @@ class DrawingViewController: UIViewController {
     }
     
     @IBAction func changeColor(_ sender: UIButton) {
+        let randomColor = RandomColorFactory.createColor()
+        
+        let viewIndices = findIndex(of: selectedView)
+        plane.changeColor(indicies: viewIndices, with: randomColor)
+        
+        selectedView.forEach {
+            guard let alpha = Alpha(rawValue: Double($0.alpha)) else {
+                return
+            }
+            $0.backgroundColor = convertToUIColor(by: randomColor, with: alpha)
+        }
     }
     
     @IBAction func createRectangleView(_ sender: UIButton) {
@@ -56,12 +67,7 @@ class DrawingViewController: UIViewController {
     
     @IBAction func isValuechanged(_ sender: UISlider) {
         let value = Double(sender.value)
-        var viewIndices: [Int] = []
-        selectedView.forEach {
-            if let index = figureViews.firstIndex(of: $0) {
-                viewIndices.append(index)
-            }
-        }
+        let viewIndices = findIndex(of: selectedView)
         
         plane.changeAlpha(indices: viewIndices, with: value)
         
@@ -91,6 +97,16 @@ class DrawingViewController: UIViewController {
 }
 
 extension DrawingViewController {
+    private func findIndex(of views: [UIView]) -> [Int] {
+        var viewIndices: [Int] = []
+        views.forEach {
+            if let index = figureViews.firstIndex(of: $0) {
+                viewIndices.append(index)
+            }
+        }
+        return viewIndices
+    }
+    
     private func converToView(by rectangle: Rectangle) -> UIView {
         let rectangleView = UIView(
             frame: CGRect(x: rectangle.point.x,
