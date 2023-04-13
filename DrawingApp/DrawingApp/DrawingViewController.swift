@@ -5,8 +5,8 @@ class DrawingViewController: UIViewController {
     var tapGestureRecognizer = UITapGestureRecognizer()
     var rectangleFactory: RectangleFactory?
     var plane = Plane()
-    var selectedView:[UIView] = []
-    var figureViews: Dictionary<Id, UIView> = [:]
+    var selectedView: [UIView] = []
+    var figureViews: [UIView] = []
     var logger: Logger = Logger(subsystem: "com.inwoo.DrawingApp", category: "ViewController")
     
     @IBOutlet weak var alphaSlider: UISlider!
@@ -36,19 +36,16 @@ class DrawingViewController: UIViewController {
         }
     }
     
+    @IBAction func changeColor(_ sender: UIButton) {
+    }
+    
     @IBAction func createRectangleView(_ sender: UIButton) {
         guard let rectangle = rectangleFactory?.create() else { return }
-
-        // Plane에서 mutating 키워드를 사용하여 추가하는 대신 클로저를 이용하여 구현했습니다.
-        // 근거는 클로저로 해당 기능을 구현했을 때, plane구조체의 주소값이 바뀌지 않는 장점이 있었기 때문입니다.
-        let closure = { (rectangle: Rectangle) in
-            self.plane.rectangles += [rectangle]
-        }
-        closure(rectangle)
+        plane.add(element: rectangle)
         
         let rectangleView = converToView(by: rectangle)
-        self.figureViews[rectangle.id] = rectangleView
-            
+        
+        self.figureViews.append(rectangleView)
         self.view.addSubview(rectangleView)
         self.view.bringSubviewToFront(sender)
     }
@@ -58,11 +55,18 @@ class DrawingViewController: UIViewController {
     }
     
     @IBAction func isValuechanged(_ sender: UISlider) {
-        let value = sender.value
-        if !selectedView.isEmpty {
-            selectedView.forEach {
-                $0.alpha = CGFloat(value)
+        let value = Double(sender.value)
+        var viewIndices: [Int] = []
+        selectedView.forEach {
+            if let index = figureViews.firstIndex(of: $0) {
+                viewIndices.append(index)
             }
+        }
+        
+        plane.changeAlpha(indices: viewIndices, with: value)
+        
+        selectedView.forEach {
+            $0.alpha = CGFloat(value)
         }
     }
     
